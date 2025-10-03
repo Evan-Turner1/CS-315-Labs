@@ -1,0 +1,180 @@
+[gd_scene load_steps=25 format=3 uid="uid://dibf4u57nhdej"]
+
+[ext_resource type="Script" uid="uid://ce08dsnwb8ixq" path="res://Infinite/ground_spawner.gd" id="1_c87q2"]
+[ext_resource type="PackedScene" uid="uid://cydquwuj6gb52" path="res://Infinite/ground.tscn" id="2_mr4h6"]
+[ext_resource type="Script" uid="uid://bg38w8mqf533" path="res://Infinite/inf_player.gd" id="3_l1h2y"]
+[ext_resource type="SpriteFrames" uid="uid://ch2pgfum6tid0" path="res://Infinite/player_frames.tres" id="4_4s0nj"]
+[ext_resource type="AudioStream" uid="uid://c2mjnjuyba6to" path="res://Infinite/sounds/jump.wav" id="5_u1mey"]
+[ext_resource type="AudioStream" uid="uid://ctxj6013crxdc" path="res://Infinite/sounds/crash.wav" id="6_aaifk"]
+[ext_resource type="Script" uid="uid://bc6qf0vt2oe35" path="res://Infinite/coin.gd" id="7_t3en6"]
+[ext_resource type="Texture2D" uid="uid://c2j1a2kac21bn" path="res://Infinite/sprites/coin.png" id="8_qkk63"]
+[ext_resource type="AudioStream" uid="uid://ckm7x2bn3g0u3" path="res://Infinite/sounds/Ludum Dare 38 - Track 2.wav" id="9_78xco"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kv8s7"]
+radius = 34.0
+height = 114.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kg5e"]
+size = Vector2(11.6338, 12.0661)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ho04"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n43jm"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uumb"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yifqt"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avprc"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj0g5"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocsbj"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5l1b"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50uic"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ie2s"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icpap"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5g14"]
+atlas = ExtResource("8_qkk63")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mw374"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ho04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n43jm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uumb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yifqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avprc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj0g5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocsbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5l1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50uic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ie2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icpap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5g14")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="InfiniteRunner" type="Node2D"]
+
+[node name="Ground_spawner" type="Node2D" parent="."]
+position = Vector2(1178, 400)
+script = ExtResource("1_c87q2")
+
+[node name="Timer" type="Timer" parent="Ground_spawner"]
+
+[node name="Ground" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(-1, 2)
+
+[node name="Ground6" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(1083, 3)
+
+[node name="Ground5" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(868, 4)
+
+[node name="Ground4" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(653, 5)
+
+[node name="Ground2" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(227, 3)
+
+[node name="Ground3" parent="." instance=ExtResource("2_mr4h6")]
+position = Vector2(439, 6)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(6, 23)
+script = ExtResource("3_l1h2y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(136, 281)
+shape = SubResource("CapsuleShape2D_kv8s7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(128, 222)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("4_4s0nj")
+animation = &"hurt"
+autoplay = "default"
+
+[node name="SFX" type="Node2D" parent="Player"]
+
+[node name="jump" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("5_u1mey")
+
+[node name="Crash" type="AudioStreamPlayer" parent="Player/SFX"]
+stream = ExtResource("6_aaifk")
+
+[node name="Coin" type="Area2D" parent="."]
+position = Vector2(904, 341)
+scale = Vector2(3.43825, 4.3096)
+script = ExtResource("7_t3en6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_3kg5e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Coin"]
+sprite_frames = SubResource("SpriteFrames_mw374")
+autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_78xco")
+autoplay = true
+
+[connection signal="timeout" from="Ground_spawner/Timer" to="Ground_spawner" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
