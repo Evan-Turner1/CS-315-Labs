@@ -1,0 +1,210 @@
+[gd_scene load_steps=23 format=3 uid="uid://hyegv3p24vf0"]
+
+[ext_resource type="Script" uid="uid://b7cdqpwe5ofns" path="res://BeatEmUp/character_body_2d.gd" id="1_t00hx"]
+[ext_resource type="Texture2D" uid="uid://dl43de7oa7r0l" path="res://BeatEmUp/adventurer-1.3-Sheet.png" id="2_uvawb"]
+[ext_resource type="Script" uid="uid://cxu01bj86q7nt" path="res://BeatEmUp/badnik.gd" id="3_f8rpn"]
+[ext_resource type="Texture2D" uid="uid://dyk5en4vm3mw2" path="res://BeatEmUp/Ball2.png" id="4_ocynb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f8rpn"]
+
+[sub_resource type="Animation" id="Animation_ocynb"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.733333, 1.13333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_4y2nw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/AttackRegion:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_ti6vq"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.533333, 0.666667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_rg5x3"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/AttackRegion:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.234451, 0.37336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wqbm"]
+_data = {
+&"RESET": SubResource("Animation_4y2nw"),
+&"attack": SubResource("Animation_rg5x3"),
+&"idle": SubResource("Animation_ocynb"),
+&"walk": SubResource("Animation_ti6vq")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ar12n"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2h8hs"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mgxhf"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hiogu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y7gc8"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8f4p3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_176n1"]
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhw2h"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uygml"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7y1g0"]
+states/attack/node = SubResource("AnimationNodeAnimation_ar12n")
+states/attack/position = Vector2(449, 180)
+states/idle/node = SubResource("AnimationNodeAnimation_2h8hs")
+states/idle/position = Vector2(366, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_mgxhf")
+states/walk/position = Vector2(524, 83)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_hiogu"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_y7gc8"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8f4p3"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_176n1"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_yhw2h"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_uygml")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4y2nw"]
+size = Vector2(22.5, 33.75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ti6vq"]
+
+[node name="BeatEmUp" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(214, 329)
+scale = Vector2(4, 4)
+script = ExtResource("1_t00hx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_f8rpn")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_uvawb")
+hframes = 8
+vframes = 12
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_7wqbm")
+}
+autoplay = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_7y1g0")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack = false
+parameters/conditions/idle = false
+parameters/conditions/walk = false
+
+[node name="AttackRegion" type="Area2D" parent="CharacterBody2D"]
+process_mode = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AttackRegion"]
+position = Vector2(17.5, 0.625)
+shape = SubResource("RectangleShape2D_4y2nw")
+
+[node name="Badnik" type="CharacterBody2D" parent="." groups=["enemy"]]
+position = Vector2(765, 330)
+script = ExtResource("3_f8rpn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Badnik"]
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_ti6vq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Badnik"]
+position = Vector2(2, 0)
+scale = Vector2(0.347561, 0.374172)
+texture = ExtResource("4_ocynb")
+
+[node name="ProgressBar" type="ProgressBar" parent="Badnik"]
+offset_left = -43.0
+offset_top = -108.0
+offset_right = 44.0
+offset_bottom = -81.0
+max_value = 5.0
+value = 5.0
+
+[connection signal="body_entered" from="CharacterBody2D/AttackRegion" to="CharacterBody2D" method="_on_attack_region_body_entered"]
