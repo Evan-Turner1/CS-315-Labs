@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6xhryx4kwoom"]
+
+[ext_resource type="Script" uid="uid://5htyxe5blnyf" path="res://Monkey_Ball/ground_movement.gd" id="1_w8qtq"]
+[ext_resource type="PackedScene" uid="uid://bug0em1giytr2" path="res://Monkey_Ball/ground.tscn" id="2_1fjxp"]
+[ext_resource type="Material" uid="uid://mve0kj1j66s0" path="res://Monkey_Ball/ball_outside.tres" id="3_1fjxp"]
+[ext_resource type="Script" uid="uid://cfrfgg0yom85t" path="res://Monkey_Ball/M_camera_follow.gd" id="3_fo13h"]
+[ext_resource type="PackedScene" uid="uid://dn4yig5vqnrgo" path="res://Monkey_Ball/obstacle.tscn" id="3_olrla"]
+[ext_resource type="PackedScene" uid="uid://r4jffgd10w57" path="res://Monkey_Ball/banana.tscn" id="4_wv87n"]
+[ext_resource type="PackedScene" uid="uid://bhtgng7nqnspy" path="res://Monkey_Ball/Mage.glb" id="5_olrla"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fo13h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wv87n"]
+
+[node name="MonkeyBall" type="Node3D"]
+
+[node name="GroundHolder" type="Node3D" parent="."]
+script = ExtResource("1_w8qtq")
+
+[node name="Ground" parent="GroundHolder" instance=ExtResource("2_1fjxp")]
+transform = Transform3D(11.6159, 0, 0, 0, 0.661148, 0, 0, 0, 7.95694, 0, 0, 0)
+
+[node name="Obstacle" parent="GroundHolder" instance=ExtResource("3_olrla")]
+transform = Transform3D(0.54024, -0.841511, 0, 0.841511, 0.54024, 0, 0, 0, 1, -6.06313, 0.105819, 7.25769)
+
+[node name="Obstacle2" parent="GroundHolder" instance=ExtResource("3_olrla")]
+transform = Transform3D(0.54024, -0.841511, 0, 0.841511, 0.54024, 0, 0, 0, 1, -9.5441, 0.105819, 5.25541)
+
+[node name="Obstacle3" parent="GroundHolder" instance=ExtResource("3_olrla")]
+transform = Transform3D(0.54024, -0.841511, 0, 0.841511, 0.54024, 0, 0, 0, 1, -12.9267, 0.105819, 7.03224)
+
+[node name="Ground2" parent="GroundHolder" instance=ExtResource("2_1fjxp")]
+transform = Transform3D(22.4784, 0, 0, 0, 0.661148, 0, 0, 0, 4.41458, -11.8769, 0, 6.09067)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.00198968, 0.999998, 0, -0.999998, 0.00198968, 0, 19.1132, 0)
+
+[node name="MPlayer" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17469, 3.96554, 0)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MPlayer"]
+shape = SubResource("SphereShape3D_fo13h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MPlayer"]
+layers = 3
+material_override = ExtResource("3_1fjxp")
+mesh = SubResource("SphereMesh_wv87n")
+
+[node name="Camera3D" type="Camera3D" parent="MPlayer" node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(-0.0370174, -0.348578, 0.936548, -0.00564926, 0.937249, 0.348616, -0.999299, 0.00761405, -0.0366637, 3.55055, 5.69701, -0.0809126)
+top_level = true
+script = ExtResource("3_fo13h")
+follow_target = NodePath("..")
+offset = Vector3(2, 2.5, 0)
+
+[node name="Mage" parent="MPlayer" instance=ExtResource("5_olrla")]
+transform = Transform3D(3.42229e-09, 0, -0.286987, 0, 0.286987, 0, 0.286987, 0, 3.42229e-09, 0, -0.365817, 0)
+
+[node name="Banana" parent="." instance=ExtResource("4_wv87n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21606, 0.330574, 2.88175)
+
+[node name="Banana2" parent="." instance=ExtResource("4_wv87n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35647, 0.330574, -0.030334)
+
+[node name="Banana3" parent="." instance=ExtResource("4_wv87n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63842, 0.330574, 2.59319)

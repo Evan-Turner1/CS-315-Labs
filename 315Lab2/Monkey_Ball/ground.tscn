@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bug0em1giytr2"]
+
+[ext_resource type="Material" uid="uid://bvi4h4y0oe8v2" path="res://Monkey_Ball/m_ground_material.tres" id="1_nsf2y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6nj3k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fo13h"]
+
+[node name="Ground" type="StaticBody3D"]
+transform = Transform3D(22.4784, 0, 0, 0, 0.661148, 0, 0, 0, 14.1355, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6nj3k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_nsf2y")
+mesh = SubResource("BoxMesh_fo13h")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://r4jffgd10w57"]
+
+[ext_resource type="Script" uid="uid://de72ejmej62dg" path="res://Monkey_Ball/banana.gd" id="1_8n6td"]
+[ext_resource type="Material" uid="uid://1u6vnpd35hrd" path="res://Monkey_Ball/banana_material.tres" id="1_mb6cj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fo13h"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wv87n"]
+
+[node name="Banana" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8n6td")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07228, 0)
+shape = SubResource("CapsuleShape3D_fo13h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08338, 0)
+material_override = ExtResource("1_mb6cj")
+mesh = SubResource("CapsuleMesh_wv87n")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
